@@ -1,0 +1,6 @@
+[{
+  "input": "./src/assets/scripts/examples/app.coffee",
+  "output": "app.js",
+  "public": "./public/scripts/examples",
+  "dist": "./dist/scripts/examples"
+}]

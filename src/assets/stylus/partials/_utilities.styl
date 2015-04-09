@@ -1,0 +1,155 @@
+// ==================================================
+// 工具
+// ==================================================
+
+// 清除浮动
+// ------------------------------
+clearfix()
+  @extend $clearfix
+
+// Tab聚焦
+// ------------------------------
+tab-focus()
+  // 默认
+  outline thin dotted #333
+  // Webkit
+  outline 5px auto -webkit-focus-ring-color
+  outline-offset -2px
+
+// 修复 IE6/7 inline-block bug
+// --------------------------------------------
+inline-block()
+  display inline-block
+  if support-for-ie
+    *display inline
+    *zoom 1
+
+// 文本溢出
+// @param 容器宽度
+// ------------------------------
+text-overflow(width = 100%)
+  width width
+  overflow hidden
+  word-wrap normal
+  white-space nowrap
+  text-overflow ellipsis
+
+// 文本隐藏
+// ------------------------------
+hide-text()
+  overflow hidden
+  white-space normal
+  text-indent -9999px
+
+// 高亮链接
+// ------------------------------
+highlight-link()
+  &:link
+  &:visited
+  &:hover
+    color link-highlight-color
+
+// 列表重置
+// ------------------------------
+reset-list()
+  list-style none
+  margin 0
+  padding 0
+
+// 设置元素最小高度
+// @param 最小高度
+// ------------------------------
+min-height(height)
+  min-height height
+  height auto !important
+  height height
+
+// 设置rem单位
+// ------------------------------
+rem(size)
+  font-size unit(size * 10, 'px')
+  font-size unit(size, 'rem')
+
+
+// 栅格系统
+// ------------------------------
+grid-core(grid-column-width, grid-gutter-width)
+  // 行
+  .row
+    clearfix()
+    margin-left grid-gutter-width * -1
+    if support-for-ie
+      _position relative
+
+  // 列
+  $column
+    float left
+    margin-left grid-gutter-width
+    if support-for-ie
+      _display inline
+
+  // 容器
+  .container
+    margin auto
+    grid-core-column(grid-columns, grid-column-width, grid-gutter-width)
+    clearfix()
+
+  grid-core-column-x(grid-columns, grid-column-width, grid-gutter-width)
+  grid-core-offset-x(grid-columns, grid-column-width, grid-gutter-width)
+
+// 生成各种宽度的列
+grid-core-column-x(grid-columns, grid-column-width, grid-gutter-width)
+  .column
+    @extend $column
+  for column in 3..grid-columns
+    .column{column}
+      @extend $column
+      grid-core-column(column, grid-column-width, grid-gutter-width)
+
+// 生成各种偏移值
+grid-core-offset-x(grid-columns, grid-column-width, grid-gutter-width)
+  for column in 1..grid-columns
+    .offet{column}
+      grid-core-offset(column, grid-column-width, grid-gutter-width)
+
+// 生成列
+grid-core-column(columns, grid-column-width, grid-gutter-width)
+  width grid-column-width * columns + grid-gutter-width * (columns - 1)
+
+// 生成偏移
+grid-core-offset(columns, grid-column-width, grid-gutter-width)
+  margin-left grid-column-width * columns + grid-gutter-width * (columns + 1)
+
+// 小三角
+// @param 颜色
+// @param 尺寸
+// @param 方向
+// ------------------------------
+triangle(color = #000, size = 10px, direction = down)
+  @extend $triangle-core
+  border-width (size/2)
+
+  if direction is up
+    border-style dashed dashed solid
+    border-color transparent transparent color
+  else if direction is right
+    border-style dashed dashed dashed solid
+    border-color transparent transparent transparent color
+  else if direction is down
+    border-style solid dashed dashed
+    border-color color transparent transparent
+  else if direction is left
+    border-style dashed solid dashed dashed
+    border-color transparent color transparent transparent
+  else if direction is up-left
+    border-style solid dashed dashed solid
+    border-color color transparent transparent color
+  else if direction is up-right
+    border-style solid solid dashed dashed
+    border-color color color transparent transparent
+  else if direction is down-left
+    border-style dashed dashed solid solid
+    border-color transparent transparent color color
+  else
+    border-style dashed solid solid dashed
+    border-color transparent color color transparent

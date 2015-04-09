@@ -1,0 +1,191 @@
+- var files = '[';
+  each page, index in collection
+    - files += '{title:"';
+    - files += page.title;
+    - files += '",url:"';
+    - files += page.url + '.html", is_new:';
+    - files += page.is_new ? page.is_new : false;
+    if index < collection.length - 1
+      - files += '},';
+    else
+      - files += '}';
+- files += ']'
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title 网站名称
+    meta(name="HandheldFriendly", content="true")
+    meta(name="MobileOptimized", content="640")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(http-equiv="cleartype", content="on")
+    meta(name="msapplication-TileColor", content="#222222")
+    link(rel="stylesheet", href="styles/demo.css")
+    style.
+      .ng-cloak {
+        display: none !important
+      }
+
+  body(ng-app="app", ng-controller="FilterController")
+    header.header
+      .top-bar
+        nav.nav
+          ul
+            li
+              a(href="#") 演示
+            li
+              a(href="#") 文档
+      .jumbotron(data-topbar, filters)
+        h1
+          | 网站名称
+          sup.version v1
+        .filters(toggle-eraser, toggle-tags)
+          .keyword
+            input(type="text", placeholder="请输入过滤关键字...", ng-model="keyword", ng-focus="keywordFocused=true", ng-blur="keywordFocused=false")
+            span.eraser(ng-show="showEraser", erase-input, ng-click="clear()") &times;
+            .tags(ng-show="showTags")
+              tag(ng-repeat="tag in tags", label="tag.label")
+    .links
+      .item(ng-repeat="file in files | filter:keyword", class="{{file.is_new ? 'new' : ''}}")
+        a(href="./{{file.url}}", target="_blank")
+          span.title.ng-cloak {{file.title}}
+          span.url.ng-cloak {{file.url}}
+    script(type="text/javascript", src="http://cdn.staticfile.org/angular.js/1.2.18/angular.min.js")
+    script.
+      (function() {
+        document.write('<script>var files = !{files}<\/script>');
+      }).call(this);
+    script.
+      (function() {
+        angular.module('app.controllers', [])
+          .controller('FilterController', [
+            '$scope',
+            function($scope) {
+              $scope.files = files;
+              $scope.keyword = '';
+              return $scope.tags = [{
+                label: "首页"
+                }, {
+                label: "列表页"
+              }];
+            }
+          ]);
+
+        angular.module('app.directives', [])
+          .directive('filters', [
+            function() {
+              return {
+                restrict: 'A',
+                replace: true,
+                controller: [
+                  '$scope',
+                  function($scope) {
+                    return {
+                      input: function(text) {
+                        return $scope.keyword = text;
+                      },
+                      clear: function() {
+                        return $scope.keyword = '';
+                      }
+                    };
+                  }
+                ]
+              };
+            }
+          ])
+
+          .directive('tag', [
+            function() {
+              return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                  label: '='
+                },
+                require: '^?filters',
+                template: '<a class="label" ng-click="insert()" ng-model="label">{{label}}</a>',
+                link: function(scope, element, attrs, filtersController) {
+                  return scope.insert = function() {
+                    return filtersController.input(element[0].textContent || element[0].innerText);
+                  };
+                }
+              };
+            }
+          ])
+
+          .directive('eraseInput', [
+            function() {
+              return {
+                restrict: 'A',
+                require: '^?filters',
+                link: function(scope, element, attrs, filtersController) {
+                  return scope.clear = function() {
+                    return filtersController.clear();
+                  };
+                }
+              };
+            }
+          ])
+
+          .directive('toggleEraser', [
+            function() {
+              return {
+                restrict: 'A',
+                controller: [
+                  '$scope', '$element',
+                  function($scope, $element) {
+                    var getKeyword;
+                    $scope.showEraser = false;
+                    getKeyword = function() {
+                      return $scope.keyword;
+                    };
+                    return $scope.$watch(getKeyword, function() {
+                      if (getKeyword()) {
+                        $scope.showEraser = true;
+                        return $scope.showTags = false;
+                      } else {
+                        $scope.showEraser = false;
+                        if ($scope.keywordFocused) {
+                          return $scope.showTags = true;
+                        }
+                      }
+                    });
+                  }
+                ]
+              };
+            }
+          ])
+
+          .directive('toggleTags', [
+            function() {
+              return {
+                restrict: 'A',
+                controller: [
+                  '$scope', '$element',
+                  function($scope, $element) {
+                    var getKeywordFocused;
+                    $scope.keywordFocused = false;
+                    $scope.showTags = false;
+                    getKeywordFocused = function() {
+                      return $scope.keywordFocused;
+                    };
+                    return $scope.$watch(getKeywordFocused, function() {
+                      if (getKeywordFocused() && $scope.keyword === '') {
+                        return $scope.showTags = true;
+                      } else {
+                        return setTimeout(function() {
+                          $scope.showTags = false;
+                          return $scope.$apply();
+                        }, 100);
+                      }
+                    });
+                  }
+                ]
+              };
+            }
+          ]);
+
+          angular.module('app', ['app.controllers', 'app.directives']);
+
+          }).call(this);

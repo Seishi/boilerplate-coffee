@@ -1,0 +1,324 @@
+// 定义Demo聚合页样式
+// ==================================================
+
+// 配置
+// ==================================================
+
+// 灰度色
+// ------------------------------
+black        = #000
+gray-dark    = #333
+gray         = #666
+gray-light   = #999
+gray-lighter = #CCC
+white        = #FFF
+
+blue       = #21ACFF
+blue-light = #8DD4FF
+orange     = #FCA407
+green      = #84CE42
+
+// 超链接色
+// ------------------------------
+// 正常状态
+link-color = blue
+// 滑过状态
+link-color-hover = darken(blue, 10%)
+link-background-hover = #F9F9F9
+
+// 边框颜色
+border-color = #E6E6E6
+
+// 排版
+// ------------------------------
+
+// 字体集
+arial          = Arial, Tahoma, "Helvetica Neue", Helvetica, sans-serif
+tahoma         = Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif
+helvetica-neue = "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif
+helvetica      = "Helvetica Neue", Helvetica, Arial, sans-serif
+georgia        = Georgia, Cambria, "Times New Roman", Times, serif
+times          = "Times New Roman", Times, serif
+yahei          = "Hiragino Sans GB", "Microsoft Yahei", "SimSun"
+heiti          = "SimHei"
+songti         = "SimSun"
+
+// 默认字体
+font-stack  = yahei
+font-size   = 62.5%
+font-color  = gray-dark
+line-height = 1.5
+
+// 导入Nib
+
+@import 'nib'
+
+// 混入声明
+@import "partials/_utilities"
+
+// 重置
+@import "partials/_reset"
+
+// 页面主体
+// ------------------------------
+html
+body
+  overflow-x hidden
+  height 100%
+
+html
+  font-size font-size
+
+body
+  margin 0
+  background white
+  line-height line-height
+  font-family font-stack
+  color font-color
+
+// 超链接
+// ------------------------------
+a
+  &:link
+  &:visited
+    color link-color
+    text-decoration none
+  &:hover
+  &:active
+    color link-color-hover
+    text-decoration underline
+
+// 表单元素
+// ------------------------------
+
+// 去除input和textarea元素的聚焦样式
+input:focus
+textarea:focus
+  outline none
+
+// 占位符
+@import "partials/_placeholders"
+
+// Angular
+.ng-cloak
+  display none
+
+// Header
+.header
+  fixed left top
+  width 100%
+  z-index 10000
+
+.top-bar
+  height 40px
+  overflow hidden
+  border-bottom 1px solid border-color
+  background white
+
+.nav
+  ul
+    reset-list()
+    clearfix()
+
+  li
+    float left
+    height 40px
+    line-height 40px
+    border-right 1px solid border-color
+
+    a
+      display block
+      padding 0 20px
+      rem 1.2
+      text-transform uppercase
+      color gray-light
+
+      &:hover
+        background link-background-hover
+        text-decoration none
+        color gray-dark
+
+.jumbotron
+  padding 20px 0
+  background #F6F6F6
+  border-bottom 1px solid border-color
+
+  h1
+    display inline-block
+    vertical-align middle
+    color gray-dark
+    margin 0
+    rem 2.4
+    height 40px
+    line-height 40px
+    padding 0 60px 0 20px
+    font-weight normal
+
+    sup
+      rem 1
+      top -1.2em
+      margin-left 3px
+      background blue
+      padding 0 4px
+      color white
+      border-radius 2px
+
+// 过滤器
+.filters
+  position relative
+  display inline-block
+
+  .keyword
+    position relative
+    width 300px
+    margin 0 auto
+
+  .eraser
+    absolute right 10px top 10px
+    color white
+    rem 1.2
+    size 20px
+    line-height 18px
+    border-radius 40px
+    background rgba(0, 0, 0, .3)
+    transition .3s
+    cursor pointer
+    text-align center
+
+    &:hover
+      background rgba(255, 0, 0, .5)
+
+  input
+    height 28px
+    padding 5px 10px
+    min-width 278px
+    border 1px solid #DBDBDB
+    color gray
+    rem 1.2
+    vertical-align middle
+
+    &:focus
+      border-color gray-lighter
+      color gray-dark
+
+// 标签
+.tags
+  absolute left 0 top 39px
+  width 290px
+  padding 0 4px 4px
+  border 1px solid #DBDBDB
+  text-align left
+  background white
+
+  .label
+    float left
+    margin 4px 4px 0 0
+    cursor pointer
+    color gray-light
+    background white
+    border 1px solid border-color
+    rem 1.2
+    height 24px
+    line-height 24px
+    padding 2px 14px
+    white-space nowrap
+
+    &:hover
+      background link-background-hover
+      text-decoration none
+      color gray-dark
+
+// 链接列表
+.links
+  clearfix()
+  padding-top 122px
+  padding-bottom 20px
+
+  .item
+    float left
+    size 200px 80px
+    margin 20px 0 0 20px
+    border 1px solid border-color
+    border-left 4px solid blue-light
+    transition border-color .3s
+    border-radius 5px
+
+    &:hover
+      border-color gray-lighter
+      border-left-color orange
+
+  a
+    display block
+    size 100%
+
+    .title
+      display block
+      padding 0 10px
+      margin 8px 0 4px
+      color gray
+      rem 1.4
+      line-height 20px
+      height 40px
+      overflow hidden
+      transition color .3s
+
+    .url
+      display block
+      padding-left 10px
+      rem 1
+      color gray-lighter
+      transition color .3s
+      line-height 12px
+
+    &:hover
+      text-decoration none
+
+      .title
+        color black
+
+      .url
+        color gray-light
+
+  .new
+    position relative
+    overflow hidden
+
+    &::before
+      absolute right -18px top 6px
+      padding 0 20px
+      content 'NEW'
+      background green
+      color #FFF
+      font-size 10px
+      transform rotate(45deg)
+
+@media screen and (max-width: 640px)
+  .header
+    position static
+
+  .jumbotron
+    padding 25px 0
+
+    h1
+      display block
+      padding 0
+      text-align center
+
+  .filters
+    display block
+    text-align center
+
+    .keyword
+      margin-top 10px
+
+  .links
+    padding-top 0
+
+    .item
+      float none
+      width auto
+      margin-right 20px
+
+
+
+

@@ -1,0 +1,19 @@
+---
+page_title: "首页"
+mobile_page: true
+---
+
+extend _layout
+
+block content
+  p
+    != environment
+  p
+    != current.base
+  p
+    != current.source
+  p
+    != current.path
+
+block scripts
+  script(src="#{current.base}scripts/examples/app.js")

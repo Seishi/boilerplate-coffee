@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title= site_name + '-' + page_title
+    meta(name="keyword", content="#{page_keyword}")
+    meta(name="description", content="#{page_description}")
+    if mobile_page
+      meta(name="HandheldFriendly", content="true")
+      meta(name="MobileOptimized", content="320")
+      meta(name="viewport", content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1.0, user-scalable=no")
+      meta(http-equiv="cleartype", content="on")
+      meta(name="format-detection", content="telephone=no")
+      meta(name="msapplication-TileColor", content="#222222")
+    link(href="#{current.base}styles/main.css", rel="stylesheet")
+  body
+    block content
+
+    block scripts
