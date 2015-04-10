@@ -66,10 +66,25 @@ min-height(height)
 
 // 设置rem单位
 // ------------------------------
-rem(size)
-  font-size unit(size * 10, 'px')
-  font-size unit(size, 'rem')
+rem(property, values...)
+  max = length(values) - 1
+  remValues = ''
+  changed = false
 
+  for i in 0..max
+    value = values[i]
+    if value is a 'unit' and unit(value) is not '' and unit(value) is not '%'
+      value = unit(value / browser-default-font-size, 'rem')
+      changed = true
+    remValues = remValues + value
+
+    if i <max
+      remValues = remValues + " "
+
+  {property}: values
+  // 判断转化后的结果是否跟原来相同，如果相同则不需要输出 rem 单位的语句
+  if changed
+    {property}: unquote(remValues)
 
 // 栅格系统
 // ------------------------------

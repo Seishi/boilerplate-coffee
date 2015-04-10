@@ -2,9 +2,10 @@ doctype html
 html
   head
     meta(charset="UTF-8")
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
     title= site_name + '-' + page_title
-    meta(name="keyword", content="#{page_keyword}")
-    meta(name="description", content="#{page_description}")
+    meta(name="keyword", content="#{page_keyword || ''}")
+    meta(name="description", content="#{page_description || ''}")
     if mobile_page
       meta(name="HandheldFriendly", content="true")
       meta(name="MobileOptimized", content="320")
@@ -13,7 +14,17 @@ html
       meta(name="format-detection", content="telephone=no")
       meta(name="msapplication-TileColor", content="#222222")
     link(href="#{current.base}styles/main.css", rel="stylesheet")
+    if html5
+      <!--[if lt IE 9]>
+      script(src="http://cdn.staticfile.org/html5shiv/3.7/html5shiv.min.js")
+      <![endif]-->
   body
+    block header
+      include partials/_header
+
     block content
+
+    block footer
+      include partials/_footer
 
     block scripts

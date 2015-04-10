@@ -45,7 +45,7 @@ songti         = "SimSun"
 
 // 默认字体
 font-stack  = yahei
-font-size   = 62.5%
+browser-default-font-size = 10px
 font-color  = gray-dark
 line-height = 1.5
 
@@ -67,11 +67,12 @@ body
   height 100%
 
 html
-  font-size font-size
+  font-size browser-default-font-size
 
 body
   margin 0
   background white
+  font-size 12px
   line-height line-height
   font-family font-stack
   color font-color
@@ -129,7 +130,7 @@ textarea:focus
     a
       display block
       padding 0 20px
-      rem 1.2
+      rem font-size 12px
       text-transform uppercase
       color gray-light
 
@@ -148,14 +149,14 @@ textarea:focus
     vertical-align middle
     color gray-dark
     margin 0
-    rem 2.4
+    rem font-size 24px
     height 40px
     line-height 40px
     padding 0 60px 0 20px
     font-weight normal
 
     sup
-      rem 1
+      rem font-size 10px
       top -1.2em
       margin-left 3px
       background blue
@@ -176,7 +177,7 @@ textarea:focus
   .eraser
     absolute right 10px top 10px
     color white
-    rem 1.2
+    rem font-size 12px
     size 20px
     line-height 18px
     border-radius 40px
@@ -194,7 +195,7 @@ textarea:focus
     min-width 278px
     border 1px solid #DBDBDB
     color gray
-    rem 1.2
+    rem font-size 12px
     vertical-align middle
 
     &:focus
@@ -217,7 +218,7 @@ textarea:focus
     color gray-light
     background white
     border 1px solid border-color
-    rem 1.2
+    rem font-size 12px
     height 24px
     line-height 24px
     padding 2px 14px
@@ -256,7 +257,7 @@ textarea:focus
       padding 0 10px
       margin 8px 0 4px
       color gray
-      rem 1.4
+      rem font-size 14px
       line-height 20px
       height 40px
       overflow hidden
@@ -265,7 +266,7 @@ textarea:focus
     .url
       display block
       padding-left 10px
-      rem 1
+      rem font-size 10px
       color gray-lighter
       transition color .3s
       line-height 12px

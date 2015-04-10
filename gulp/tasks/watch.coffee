@@ -16,8 +16,8 @@ module.exports = (gulp, opts, config, $) ->
     # 监听coffee文件
     gulp.watch config.paths.assets + "/**/*.coffee", ['test']
 
-    # 监听测试文件
-    gulp.watch config.test.unit.concat config.test.e2e, ['test']
+    # 监听单元测试文件
+    gulp.watch config.test.unit, ['unitTest']
 
     # 监听脚本打包配置文件
     gulp.watch config.browserify.files, ['browserify']
