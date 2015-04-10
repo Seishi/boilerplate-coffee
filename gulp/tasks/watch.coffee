@@ -13,6 +13,9 @@ module.exports = (gulp, opts, config, $) ->
     # 监听公用数据文件
     gulp.watch config.data, ['markupAll', 'generate']
 
+    # 监听集合页面
+    gulp.watch config.collection.src, ['generate']
+
     # 监听coffee文件
     gulp.watch config.paths.assets + "/**/*.coffee", ['test']
 
