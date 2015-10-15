@@ -8,5 +8,6 @@ src = path.resolve config.paths.src
 
 module.exports = (file) ->
   fileDir = path.relative src, path.dirname file.path
+  fileDir = fileDir.replace('\\', '/')
   fileName = path.basename file.path, path.extname file.path
   filePath = if fileDir then fileDir + '/' + fileName else fileName

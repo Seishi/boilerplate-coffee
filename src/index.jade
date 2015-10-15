@@ -1,5 +1,6 @@
 - var files = '[';
   each page, index in collection
+    - page.url = page.url.replace('\\', '/');
     - files += '{title:"';
     - files += page.title;
     - files += '",url:"';

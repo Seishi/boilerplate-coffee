@@ -26,7 +26,7 @@ module.exports =
       baseDir: [root + pub]
 
   assets:
-    src: assets + "/**/*.+(css|js|png|jpg|gif|map|eot|svg|ttf|woff)"
+    src: assets + "/**/*.+(css|js|png|jpg|gif|ico|map|eot|svg|ttf|woff)"
     public: root + pub
     dist: root + dist
 
