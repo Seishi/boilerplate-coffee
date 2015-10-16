@@ -6,4 +6,4 @@ rimraf = require('rimraf')
 
 module.exports = (gulp, opts, config) ->
   gulp.task 'clean', (cb) ->
-    rimraf config.paths.public, cb
+    rimraf (if opts.p then config.paths.dist else config.paths.public), cb

@@ -8,6 +8,7 @@ pathOf = require('./pathOf')
 module.exports = (file) ->
   base = ''
   pathArray = arrayFrom pathOf file
+  n = pathArray.length - 1
 
-  base += '../' while pathArray.length -= 1
+  base += '../' while n -= 1
   return base

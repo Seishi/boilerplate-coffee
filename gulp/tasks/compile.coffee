@@ -3,10 +3,4 @@
 ##################################################
 
 module.exports = (gulp, opts, $) ->
-  gulp.task 'compile', [
-    'browserify'
-    'stylus',
-    'markup',
-    'assets',
-    'generate'
-  ]
+  gulp.task 'compile', $.sequence 'clean', ['browserify', 'stylus', 'markup', 'assets', 'generate']

@@ -27,8 +27,8 @@ module.exports =
 
   assets:
     src: assets + "/**/*.+(css|js|png|jpg|gif|ico|map|eot|svg|ttf|woff)"
-    public: root + pub
-    dist: root + dist
+    public: root + pub + '/app'
+    dist: root + dist + '/app'
 
   stylus:
     src: [
@@ -37,8 +37,8 @@ module.exports =
     excluded: [
       "**/_*.styl"
     ]
-    public: root + pub + "/styles"
-    dist: root + dist + "/styles"
+    public: root + pub + "/app/styles"
+    dist: root + dist + "/app/styles"
 
   markup:
     src: [

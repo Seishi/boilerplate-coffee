@@ -3,4 +3,4 @@
 ##################################################
 
 module.exports = (gulp, opts, config, $) ->
-  gulp.task 'serve', $.sequence 'clean', 'compile', 'browserSync'
+  gulp.task 'serve', $.sequence 'compile', 'browserSync'
